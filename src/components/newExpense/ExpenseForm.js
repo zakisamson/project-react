@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-function ExpenseForm() {
+function ExpenseForm(props) {
   // const [Title, setTitle] = useState("");
   // const [Amount, setAmount] = useState("");
   // const [Date, setDate] = useState("");
@@ -18,7 +18,7 @@ function ExpenseForm() {
     // })
 
     //this is the better way to get previous state,
-    //because react scheduling might fucks up the last state.
+    //because React scheduling might fucks up the last state.
     //this way it's guaranteed to get the super latest update
     setUserInput((prevState) => {
       return { ...prevState, title: event.target.value };
@@ -48,10 +48,9 @@ function ExpenseForm() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
     const expense = userInput;
-    console.log(expense);
 
+    props.onSaveExpenseData(expense)
     setUserInput({
       title: "",
       amount: "",
