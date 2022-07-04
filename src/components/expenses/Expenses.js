@@ -17,21 +17,13 @@ function Expenses(props) {
   return (
     <Card className="expenses">
       <ExpensesFilter handleChangeYear={handleChangeYear} selectedYear={expensesYearFilter} />
-      { expensesYearFilter == null ? 
-        props.items.map((item) => <ExpenseItem
+      {filteredExpenses.length === 0 && <p>No expenses found.</p>}
+      {filteredExpenses.length > 0 && filteredExpenses.map((item) => <ExpenseItem
           key={item.id}
           title={item.title}
           amount={item.amount}
           date={item.date}
-        />)
-        :
-        filteredExpenses.map((item) => <ExpenseItem
-        key={item.id}
-        title={item.title}
-        amount={item.amount}
-        date={item.date}
-      />)
-      }
+        />)}
     </Card>
   );
 }
