@@ -6,23 +6,32 @@ import { useState } from 'react';
 
 function Expenses(props) {
 
-  const [expensesYearFilter, setExpensesYearFilter] = useState("2022")
+  const [expensesYearFilter, setExpensesYearFilter] = useState()
 
   const handleChangeYear = (year) => {
     setExpensesYearFilter(year)
-    console.log("this is from expenses.js")
-    console.log(expensesYearFilter)
   }
+
+  const filteredExpenses = props.items.filter(item => item.date.getFullYear() == expensesYearFilter)
 
   return (
     <Card className="expenses">
       <ExpensesFilter handleChangeYear={handleChangeYear} selectedYear={expensesYearFilter} />
-      {props.items.map((item) => <ExpenseItem
+      { expensesYearFilter == null ? 
+        props.items.map((item) => <ExpenseItem
+          key={item.id}
+          title={item.title}
+          amount={item.amount}
+          date={item.date}
+        />)
+        :
+        filteredExpenses.map((item) => <ExpenseItem
         key={item.id}
         title={item.title}
         amount={item.amount}
         date={item.date}
-      />)}
+      />)
+      }
     </Card>
   );
 }
