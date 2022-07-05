@@ -62,9 +62,7 @@ function ExpenseForm(props) {
   };
   return (
     <div>
-      <div className="new-expense__actions" style={{display: showDisplay ? "none" : "block" }}>
-        <button onClick={() => setShowDisplay(!showDisplay)}>Add New Expense</button>
-      </div>
+      {!showDisplay && <button onClick={() => setShowDisplay(!showDisplay)} >Add New Expense</button>}
       <form onSubmit={submitHandler} style={{ display: showDisplay ? "block" : "none" }}>
         <div className="new-expense__controls">
           <div className="new-expense__control">
